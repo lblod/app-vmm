@@ -1,0 +1,52 @@
+{
+  "http://lblod.data.gift/id/jobs/concept/JobOperation/codelist-matching/training": {
+    "tasksConfiguration": [
+      {
+        "currentOperation": null,
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/singleton-job",
+        "nextIndex": "0"
+      },
+      {
+        "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/singleton-job",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/training-split-tasks",
+        "nextIndex": "1"
+      },
+      {
+        "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/training-split-tasks",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/annotate",
+        "nextIndex": "2",
+        "external": true
+      },
+      {
+        "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/annotate",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/train",
+        "nextIndex": "3"
+      }
+    ]
+  },
+  "http://lblod.data.gift/id/jobs/concept/JobOperation/codelist-matching/evaluation": {
+    "tasksConfiguration": [
+      {
+        "currentOperation": null,
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/singleton-job",
+        "nextIndex": "0"
+      },
+      {
+        "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/singleton-job",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/evaluation-split-tasks",
+        "nextIndex": "1"
+      },
+      {
+        "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/evaluation-split-tasks",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/annotate",
+        "nextIndex": "2",
+        "external": true
+      },
+      {
+        "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/annotate",
+        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/assess-impact",
+        "nextIndex": "3"
+      }
+    ]
+  }
+}

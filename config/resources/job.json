@@ -1,0 +1,256 @@
+{
+    "version": "0.1",
+    "prefixes": {
+        "adms": "http://www.w3.org/ns/adms#",
+        "cogs": "http://vocab.deri.ie/cogs#",
+        "dct": "http://purl.org/dc/terms/",
+        "oslc": "http://open-services.net/ns/core#",
+        "nfo": "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#",
+        "task": "http://redpencil.data.gift/vocabularies/tasks/",
+        "ext": "http://mu.semte.ch/vocabularies/ext/",
+        "sh": "http://www.w3.org/ns/shacl#"
+    },
+    "resources": {
+        "jobs": {
+            "name": "job",
+            "class": "cogs:Job",
+            "attributes": {
+                "created": {
+                    "type": "datetime",
+                    "predicate": "dct:created"
+                },
+                "modified": {
+                    "type": "datetime",
+                    "predicate": "dct:modified"
+                },
+                "creator": {
+                    "type": "url",
+                    "predicate": "dct:creator"
+                },
+                "status": {
+                    "type": "url",
+                    "predicate": "adms:status"
+                },
+                "operation": {
+                    "type": "url",
+                    "predicate": "task:operation"
+                }
+            },
+            "relationships": {
+                "error": {
+                    "predicate": "task:error",
+                    "target": "job-error",
+                    "cardinality": "one"
+                },
+                "tasks": {
+                    "predicate": "dct:isPartOf",
+                    "target": "task",
+                    "cardinality": "many",
+                    "inverse": true
+                }
+            },
+            "features": [
+                "include-uri"
+            ],
+            "new-resource-base": "http://redpencil.data.gift/id/job/"
+        },
+        "annotation-jobs": {
+            "name": "annotation-job",
+            "class": "ext:AnnotationJob",
+            "super": [
+                "job"
+            ],
+            "attributes": {
+                "codelist": {
+                    "type": "url",
+                    "predicate": "ext:codelist"
+                },
+                "graph-for-targets": {
+                    "type": "url",
+                    "predicate": "ext:graphForTargets"
+                },
+                "property-path-for-text": {
+                    "type": "string",
+                    "predicate": "ext:propertyPathForText"
+                },
+                "confidence-threshold": {
+                    "type": "number",
+                    "predicate": "ext:confidenceThreshold"
+                }
+            },
+            "relationships": {
+                "shape-for-targets": {
+                    "predicate": "ext:shapeForTargets",
+                    "target": "node-shape",
+                    "cardinality": "many"
+                }
+            },
+            "features": [
+                "include-uri"
+            ],
+            "new-resource-base": "http://redpencil.data.gift/id/annotation-job/"
+        },
+        "scheduled-annotation-jobs": {
+            "name": "scheduled-annotation-job",
+            "class": "ext:ScheduledAnnotationJob",
+            "super": [
+                "scheduled-job"
+            ],
+            "attributes": {
+                "codelist": {
+                    "type": "url",
+                    "predicate": "ext:codelist"
+                },
+                "graph-for-targets": {
+                    "type": "url",
+                    "predicate": "ext:graphForTargets"
+                },
+                "property-path-for-text": {
+                    "type": "string",
+                    "predicate": "ext:propertyPathForText"
+                },
+                "confidence-threshold": {
+                    "type": "number",
+                    "predicate": "ext:confidenceThreshold"
+                }
+            },
+            "relationships": {
+                "shape-for-targets": {
+                    "predicate": "ext:shapeForTargets",
+                    "target": "node-shape",
+                    "cardinality": "many"
+                }
+            },
+            "features": [
+                "include-uri"
+            ],
+            "new-resource-base": "http://redpencil.data.gift/id/scheduled-annotation-job/"
+        },
+        "tasks": {
+            "name": "task",
+            "class": "task:Task",
+            "attributes": {
+                "created": {
+                    "type": "datetime",
+                    "predicate": "dct:created"
+                },
+                "modified": {
+                    "type": "datetime",
+                    "predicate": "dct:modified"
+                },
+                "status": {
+                    "type": "url",
+                    "predicate": "adms:status"
+                },
+                "operation": {
+                    "type": "url",
+                    "predicate": "task:operation"
+                },
+                "index": {
+                    "type": "string",
+                    "predicate": "task:index"
+                }
+            },
+            "relationships": {
+                "error": {
+                    "predicate": "task:error",
+                    "target": "job-error",
+                    "cardinality": "one"
+                },
+                "job": {
+                    "predicate": "dct:isPartOf",
+                    "target": "job",
+                    "cardinality": "one"
+                },
+                "parent-tasks": {
+                    "predicate": "cogs:dependsOn",
+                    "target": "task",
+                    "cardinality": "many"
+                },
+                "results-containers": {
+                    "predicate": "task:resultsContainer",
+                    "target": "data-container",
+                    "cardinality": "many"
+                },
+                "input-containers": {
+                    "predicate": "task:inputContainer",
+                    "target": "data-container",
+                    "cardinality": "many"
+                }
+            },
+            "features": [
+                "include-uri"
+            ],
+            "new-resource-base": "http://redpencil.data.gift/id/task/"
+        },
+        "job-errors": {
+            "name": "job-error",
+            "class": "oslc:Error",
+            "attributes": {
+                "message": {
+                    "type": "string",
+                    "predicate": "oslc:message"
+                }
+            },
+            "features": [
+                "include-uri"
+            ],
+            "new-resource-base": "http://redpencil.data.gift/id/jobs/error/"
+        },
+        "data-containers": {
+            "name": "data-container",
+            "class": "nfo:DataContainer",
+            "attributes": {
+                "has-graph": {
+                    "type": "url",
+                    "predicate": "task:hasGraph"
+                },
+                "has-resource": {
+                    "type": "uri-set",
+                    "predicate": "task:hasResource"
+                }
+            },
+            "relationships": {
+                "harvesting-collections": {
+                    "predicate": "task:hasHarvestingCollection",
+                    "target": "harvesting-collection",
+                    "cardinality": "many"
+                },
+                "result-from-tasks": {
+                    "predicate": "task:resultsContainer",
+                    "target": "task",
+                    "cardinality": "many",
+                    "inverse": true
+                },
+                "input-from-tasks": {
+                    "predicate": "task:inputContainer",
+                    "target": "task",
+                    "cardinality": "many",
+                    "inverse": true
+                }
+            },
+            "features": [
+                "include-uri"
+            ],
+            "new-resource-base": "http://redpencil.data.gift/id/dataContainers/"
+        },
+        "node-shapes": {
+            "name": "node-shape",
+            "class": "sh:NodeShape",
+            "attributes": {
+                "target-node": {
+                    "type": "uri-set",
+                    "predicate": "sh:targetNode"
+                },
+                "target-class": {
+                    "type": "uri-set",
+                    "predicate": "sh:targetClass"
+                }
+            },
+            "features": [
+                "include-uri"
+            ],
+            "new-resource-base": "http://redpencil.data.gift/id/shapes/"
+        }
+    }
+}

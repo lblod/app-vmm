@@ -1,0 +1,39 @@
+services:
+  identifier:
+    ports:
+      - "80:80"
+    restart: "no"
+  dispatcher:
+    restart: "no"
+  database:
+    restart: "no"
+  virtuoso:
+    ports:
+      - "8890:8890"
+    restart: "no"
+  resource:
+    restart: "no"
+  cache:
+    restart: "no"
+  deltanotifier:
+    restart: "no"
+  migrations:
+    restart: "no"
+  login:
+    restart: "no"
+  frontend-harvesting:
+    restart: "no"
+  job-controller:
+    restart: "no"
+  scheduled-job-controller:
+    restart: "no"
+  annotation-job-splitter:
+    restart: "no"
+  harvest_singleton-job:
+    restart: "no"
+  codelist-labeling:
+    restart: "no"
+  annotation-review:
+    restart: "no"
+  frontend-human-validator:
+    restart: "no"
