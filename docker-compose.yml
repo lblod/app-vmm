@@ -97,6 +97,16 @@ services:
     volumes:
       - ./config/migrations:/data/migrations
 
+  harvest_sameas:
+    image: lblod/import-with-sameas-service:4.8.0
+    environment:
+      RENAME_DOMAIN: 'http://data.lblod.info/id/'
+
+  harvest_diff:
+    image: lblod/harvesting-diff-service:0.3.0
+    environment:
+      TARGET_GRAPH: 'http://mu.semte.ch/graphs/harvesting'
+
   ##############################################################################
   # AUTHENTICATION
   ##############################################################################
@@ -134,7 +144,7 @@ services:
   # JOB PIPELINE
   ##############################################################################
   job-controller:
-    image: lblod/job-controller-service:1.3.0-beta-parallel-tasks
+    image: lblod/job-controller-service:1.4.0
     volumes:
       - ./config/job-controller:/config
     environment:
@@ -157,7 +167,7 @@ services:
     logging: *default-logging
 
   annotation-job-splitter:
-    image: lblod/annotation-job-splitter-service:0.0.1
+    image: lblod/annotation-job-splitter-service:0.0.3
     restart: always
     logging: *default-logging
     volumes:
@@ -176,7 +186,7 @@ services:
   # CODELIST LABELING (AI)
   ##############################################################################
   codelist-labeling:
-    image: semanticai/codelist-labeling-service:openai
+    image: semanticai/codelist-labeling-service:0.0.4
     environment:
       TARGET_GRAPH: http://mu.semte.ch/graphs/harvesting
       JOB_GRAPH: http://mu.semte.ch/graphs/harvesting
@@ -200,7 +210,7 @@ services:
   # HUMAN VALIDATION
   ##############################################################################
   annotation-review:
-    image: lblod/annotation-review-service:0.0.1
+    image: lblod/annotation-review-service:0.0.2
     restart: always
     labels:
       - logging=true
@@ -210,7 +220,7 @@ services:
       TZ: Europe/Brussels
 
   frontend-human-validator:
-    image: lblod/frontend-decide-human-validator:0.0.5
+    image: lblod/frontend-decide-human-validator:0.0.8
     labels:
       - 'logging=true'
     restart: always
