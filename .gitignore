@@ -19,3 +19,4 @@ vmm-dev/formatting.ipynb
 vmm-dev/codelist.ipynb
 vmm-dev/classification.ipynb
 /vmm-dev/library
+.env

@@ -202,6 +202,8 @@ services:
       MANIFESTATIONS_GRAPH: http://mu.semte.ch/graphs/public/pdf
       AI_GRAPH: http://mu.semte.ch/graphs/public/pdf
       ALLOW_MU_AUTH_SUDO: true
+      LLM__API_KEY: ${mistral_api_key}
+      
     restart: always
     volumes:
       - ./config/codelist/config.json:/usr/src/app/config.json:ro
