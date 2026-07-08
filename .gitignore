@@ -20,3 +20,4 @@ vmm-dev/codelist.ipynb
 vmm-dev/classification.ipynb
 /vmm-dev/library
 .env
+vmm-dev/data/classification_beleidsdoelstelling_results_vap_reasoning.jsonl
