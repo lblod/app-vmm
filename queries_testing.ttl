@@ -1,0 +1,60 @@
+PREFIX eli: <http://data.europa.eu/eli/ontology#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX oa: <http://www.w3.org/ns/oa#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+
+SELECT DISTINCT
+  ?annotation
+  ?target
+  ?object
+  ?concept
+  ?scheme
+  ?schemeUuid
+WHERE {
+  ?target mu:uuid ?uuid .
+  ?annotation oa:hasTarget ?target .
+  ?target a eli:Expression .
+
+  {
+    ?annotation oa:hasBody ?body .
+    ?body rdf:predicate ?predicate .
+    ?body rdf:object ?object .
+  }
+  UNION
+  {
+    ?annotation oa:hasBody ?object .
+    FILTER NOT EXISTS { ?object rdf:object ?something . }
+  }
+
+  ?action prov:generated ?annotation .
+  ?action prov:wasAssociatedWith ?agent .
+
+  VALUES ?agent {
+    <http://lblod.data.gift/id/components/codelist-annotation/v1.0.0>
+  }
+
+  ?object a skos:Concept .
+
+  OPTIONAL {
+    ?object skos:inScheme ?scheme .
+    OPTIONAL {
+      ?scheme mu:uuid ?schemeUuid .
+    }
+  }
+
+  FILTER EXISTS {
+    ?target <http://mu.semte.ch/vocabularies/ext/owningBody> ?municipality .
+    VALUES ?municipality {
+      <http://data.lblod.info/id/bestuurseenheden/353234a365664e581db5c2f7cc07add2534b47b8e1ab87c821fc6e6365e6bef5>
+    }
+  }
+
+  FILTER NOT EXISTS {
+    ?ownReview <http://www.w3.org/ns/oa#hasTarget> ?annotation .
+    ?ownReview <http://purl.org/dc/terms/creator>
+      <http://mu.semte.ch/sessions/94a0e8e8-64d8-11f1-91fe-668674dff0d3>
+  }
+}

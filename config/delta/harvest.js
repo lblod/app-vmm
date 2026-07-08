@@ -12,7 +12,7 @@ export default [
         },
         callback: {
           method: "POST",
-          url: "http://codelist-labeling/delta",
+          url: "http://harvest_singleton-job/delta",
         },
         options: {
           resourceFormat: "v0.0.1",
@@ -20,5 +20,5 @@ export default [
           ignoreFromSelf: true,
           sendMatchesOnly: true,
         },
-      }
+      },
   ];
