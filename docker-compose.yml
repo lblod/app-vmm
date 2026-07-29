@@ -144,7 +144,7 @@ services:
   # JOB PIPELINE
   ##############################################################################
   job-controller:
-    image: lblod/job-controller-service:1.4.0
+    image: lblod/job-controller-service:1.4.1
     volumes:
       - ./config/job-controller:/config
     environment:
@@ -155,7 +155,7 @@ services:
     logging: *default-logging
 
   scheduled-job-controller:
-    image: lblod/scheduled-job-controller-service:1.2.1
+    image: lblod/scheduled-job-controller-service:1.3.0
     environment:
       LOG_SPARQL_ALL: 'false'
       DEBUG_AUTH_HEADERS: 'false'
@@ -165,9 +165,11 @@ services:
       - 'logging=true'
     restart: always
     logging: *default-logging
+    volumes:
+      - ./config/scheduled-job-controller:/config
 
   annotation-job-splitter:
-    image: lblod/annotation-job-splitter-service:0.0.4
+    image: lblod/annotation-job-splitter-service:0.0.5
     restart: always
     logging: *default-logging
     volumes:
@@ -186,43 +188,42 @@ services:
   # CODELIST LABELING (AI)
   ##############################################################################
   codelist-labeling:
-    image: semanticai/codelist-labeling-service:0.0.4
+    image: semanticai/codelist-labeling-service:0.2.0
     environment:
-      TARGET_GRAPH: http://mu.semte.ch/graphs/harvesting
       JOB_GRAPH: http://mu.semte.ch/graphs/harvesting
       DATA_CONTAINER_GRAPH: http://mu.semte.ch/graphs/harvesting
-      HARVEST_COLLECTIONS_GRAPH: http://mu.semte.ch/graphs/harvesting
-      REMOTE_OBJECT_GRAPH: http://mu.semte.ch/graphs/harvesting
-      FILES_GRAPH: http://mu.semte.ch/graphs/harvesting
-      OPARL_TEMP_GRAPH: http://mu.semte.ch/graphs/harvesting
-      OSLO_TEMP_GRAPH: http://mu.semte.ch/graphs/harvesting
-      PUBLICATION_GRAPH: http://mu.semte.ch/graphs/public/pdf
-      EXPRESSIONS_GRAPH: http://mu.semte.ch/graphs/public/pdf
-      WORKS_GRAPH: http://mu.semte.ch/graphs/public/pdf
-      MANIFESTATIONS_GRAPH: http://mu.semte.ch/graphs/public/pdf
       AI_GRAPH: http://mu.semte.ch/graphs/public/pdf
       ALLOW_MU_AUTH_SUDO: true
-      LLM__API_KEY: ${mistral_api_key}
-      
+
+      CONFIG_PATH: '/config/config.json'
+      COMPOSE_FILE: /tmp/docker-compose.yaml
+      COMPOSE_SERVICE: codelist-labeling
+
+      LLM__API_KEY: ${subscription_key}
+      LLM__BASE_URL: ${azure_endpoint}
+      LLM__MODEL_NAME: ${deployment}
+
     restart: always
     volumes:
-      - ./config/codelist/config.json:/usr/src/app/config.json:ro
+      - ./config/codelist/config-config-openai.json:/config/config.json:ro # Mount config as read-only
+      - ./docker-compose.yml:/tmp/docker-compose.yaml
 
   ##############################################################################
   # HUMAN VALIDATION
   ##############################################################################
   annotation-review:
-    image: lblod/annotation-review-service:0.0.2
+    image: lblod/annotation-review-service:0.0.7
     restart: always
     labels:
       - logging=true
     logging: *default-logging
     environment:
       DEFAULT_MU_AUTH_SCOPE: 'http://services.semantic.works/annotation-review-service'
+      ANNOTATION_TARGET_TYPES: 'http://www.w3.org/ns/oa#Annotation,http://mu.semte.ch/vocabularies/ext/AnnotationTarget'
       TZ: Europe/Brussels
 
   frontend-human-validator:
-    image: lblod/frontend-decide-human-validator:0.0.8
+    image: lblod/frontend-decide-human-validator:0.0.14
     labels:
       - 'logging=true'
     restart: always

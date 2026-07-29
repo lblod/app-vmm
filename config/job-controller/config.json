@@ -41,11 +41,6 @@
         "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/annotate",
         "nextIndex": "2",
         "external": true
-      },
-      {
-        "currentOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/annotate",
-        "nextOperation": "http://lblod.data.gift/id/jobs/concept/TaskOperation/codelist-matching/assess-impact",
-        "nextIndex": "3"
       }
     ]
   }
