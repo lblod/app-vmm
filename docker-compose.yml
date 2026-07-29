@@ -205,7 +205,7 @@ services:
 
     restart: always
     volumes:
-      - ./config/codelist/config-config-openai.json:/config/config.json:ro # Mount config as read-only
+      - ./config/codelist/config-openai.json:/config/config.json:ro # Mount config as read-only
       - ./docker-compose.yml:/tmp/docker-compose.yaml
 
   ##############################################################################
