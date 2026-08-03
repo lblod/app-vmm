@@ -21,3 +21,4 @@ vmm-dev/classification.ipynb
 .env
 vmm-dev/data/classification_beleidsdoelstelling_results_vap_reasoning.jsonl
 vmm-dev/insert_data.ipynb
+vmm-dev/generating_overview.ipynb

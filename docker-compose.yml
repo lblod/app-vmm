@@ -188,7 +188,7 @@ services:
   # CODELIST LABELING (AI)
   ##############################################################################
   codelist-labeling:
-    image: semanticai/codelist-labeling-service:0.2.0
+    image: semanticai/codelist-labeling-service:0.2.1-vmm
     environment:
       JOB_GRAPH: http://mu.semte.ch/graphs/harvesting
       DATA_CONTAINER_GRAPH: http://mu.semte.ch/graphs/harvesting
@@ -202,6 +202,8 @@ services:
       LLM__API_KEY: ${subscription_key}
       LLM__BASE_URL: ${azure_endpoint}
       LLM__MODEL_NAME: ${deployment}
+
+      RATE_LIMIT_DELAY_SECONDS: 2.0
 
     restart: always
     volumes:
