@@ -33,6 +33,9 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix wikidata: <http://www.wikidata.org/entity/> .
 @prefix wot: <https://www.w3.org/2019/wot/security#> .
+@prefix session: <http://mu.semte.ch/vocabularies/session/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 ext:muAuthProfile a odrl:Profile ;
   dct:description "ODRL profile describing access to mu-auth resources." .
@@ -44,18 +47,34 @@ ext:decideAuthorizationPolicy a odrl:Set ;
     ext:allowReadForHarvestedFreiburg ,
     ext:allowReadForHarvestedGent ,
     ext:allowReadForHarvestedPdf ,
+    ext:allowReadForHarvestingPublic ,
     ext:allowReadForHarvesting ,
     ext:allowWriteForHarvesting ,
     ext:allowReadForOrganization ,
     ext:allowReadForOsloOrganizations ,
     ext:allowReadForAiSlice ,
+    ext:allowReadOsloOrgsForHumanValidation ,
     ext:allowReadForHumanValidation ,
+    ext:allowQuestionAnsweringReadForHumanValidation,
+    ext:allowReadHarvestingForHumanValidation ,
     ext:allowWriteForHumanValidation ,
+    ext:allowReadForQuestionAnswering ,
+    ext:allowWriteForQuestionAnswering ,
+    ext:allowReadOsloOrgsForQuestionAnswering,
+    ext:allowReadPublicForQuestionAnswering,
+    ext:allowReadGhentForQuestionAnswering,
+    ext:allowReadFreiburgForQuestionAnswering,
+    ext:allowReadPdfForQuestionAnswering,
+    ext:allowReadAiSliceForQuestionAnswering,
     ext:allowReadAnnotationForPublic ,
     ext:allowReadAnnotationForGhent ,
     ext:allowReadAnnotationForFreiburg ,
     ext:allowReadAnnotationForPdf ,
     ext:allowAnnotationReadForAiSlice ,
+    ext:allowReadForSession ,
+    ext:allowWriteForSession ,
+    ext:allowReadPublicForSession ,
+    ext:allowReadOrgsForSession ,
     ext:allowPublicReadForAuthz .
 
 # Parties for groups
@@ -67,12 +86,33 @@ ext:publicParty a odrl:PartyCollection ;
   vcard:fn "public" ;
   dct:description "This party represent all (possibly not logged in) users of the system." .
 
+ext:sessionService a odrl:PartyCollection ;
+  vcard:fn "session service" ;
+  dct:description "This party represent all session services running in the system." .
+
+# NOTE (19/06/2026): The filter excludes sessions associated with a mock-login
+# account.  This avoids that users using the yasgui/VC frontend can write to the
+# harvesting graph as their sessions are always linked to the mock-login
+# account.  This exclusion has two important drawbacks:
+# - If sessions for users authenticated via VC are in the future linked to
+#   non-mock-login accounts this filter will no longer work.
+# - If other types of authenticated users are added to the app, they will still
+#   be automatically members of this party and be granted the corresponding
+#   rights.
+#
+# If either of these two scenarios occur a better solution must be applied.
+# Since we do not expect them to occur within the scope of the DECIDe project
+# this solution is satisfactory.
 ext:authenticatedParty a odrl:PartyCollection ;
   vcard:fn "logged-in" ;
   ext:definedBy """PREFIX session: <http://mu.semte.ch/vocabularies/session/>
+  PREFIX foaf: <http://xmlns.com/foaf/0.1/>
   SELECT DISTINCT ?account
   WHERE {
     <SESSION_ID> session:account ?account .
+    FILTER NOT EXISTS {
+      ?account foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service> .
+    }
   }""" ;
   dct:description "This represents all logged in users of the system." .
 
@@ -129,6 +169,14 @@ ext:decideHumanValidationSlice a odrl:AssetCollection ;
   vcard:fn "human-validation" ;
   ext:graphPrefix <http://mu.semte.ch/graphs/public/human-validation> .
 
+ext:decideQuestionAnsweringSlice a odrl:AssetCollection ;
+  vcard:fn "question-answering" ;
+  ext:graphPrefix <http://mu.semte.ch/graphs/public/question-answering> .
+
+ext:decideSessionSlice a odrl:AssetCollection ;
+  vcard:fn "session information" ;
+  ext:graphPrefix <http://mu.semte.ch/graphs/sessions> .
+
 ext:decideAiSlice a odrl:AssetCollection ;
   vcard:fn "ai" ;
   ext:graphPrefix <http://mu.semte.ch/graphs/ai> .
@@ -170,6 +218,12 @@ ext:allowReadForHarvesting a odrl:Permission ;
   odrl:assigner ext:decideSystem ;
   odrl:assignee ext:authenticatedParty .
 
+ext:allowReadForHarvestingPublic a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideHarvestingSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty .
+
 ext:allowWriteForHarvesting a odrl:Permission ;
   odrl:action odrl:modify ;
   odrl:target ext:decideHarvestingSlice ;
@@ -194,9 +248,49 @@ ext:allowReadForAiSlice a odrl:Permission ;
   odrl:assigner ext:decideSystem ;
   odrl:assignee ext:publicParty .
 
+ext:allowReadForSession a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideSessionSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
+  ext:scope "http://services.semantic.works/sessions" .
+
+ext:allowWriteForSession a odrl:Permission ;
+  odrl:action odrl:modify ;
+  odrl:target ext:decideSessionSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
+  ext:scope "http://services.semantic.works/sessions" .
+
+ext:allowReadPublicForSession a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decidePublicSlice ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/sessions" .
+
+ext:allowReadOrgsForSession a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideOsloOrganizationsSlice ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/sessions" .
+
 ext:allowReadForHumanValidation a odrl:Permission ;
   odrl:action odrl:read ;
   odrl:target ext:decideHumanValidationSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
+  ext:scope "http://services.semantic.works/annotation-review-service" .
+
+ext:allowReadHarvestingForHumanValidation a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideHarvestingSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
+  ext:scope "http://services.semantic.works/annotation-review-service" .
+
+ext:allowQuestionAnsweringReadForHumanValidation a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideQuestionAnsweringSlice ;
   odrl:assigner ext:decideSystem ;
   odrl:assignee ext:publicParty  ;
   ext:scope "http://services.semantic.works/annotation-review-service" .
@@ -206,6 +300,27 @@ ext:allowWriteForHumanValidation a odrl:Permission ;
   odrl:target ext:decideHumanValidationSlice ;
   odrl:assigner ext:decideSystem ;
   odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/annotation-review-service" .
+
+ext:allowReadForQuestionAnswering a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideQuestionAnsweringSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
+  ext:scope "http://services.semantic.works/decide-question-answering-service" .
+
+ext:allowWriteForQuestionAnswering a odrl:Permission ;
+  odrl:action odrl:modify ;
+  odrl:target ext:decideQuestionAnsweringSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/decide-question-answering-service" .
+
+ext:allowReadOsloOrgsForHumanValidation a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideOsloOrganizationsSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
   ext:scope "http://services.semantic.works/annotation-review-service" .
 
 ext:allowReadAnnotationForPublic a odrl:Permission ;
@@ -238,6 +353,44 @@ ext:allowAnnotationReadForAiSlice a odrl:Permission ;
   odrl:assigner ext:decideSystem ;
   odrl:assignee ext:publicParty ;
   ext:scope "http://services.semantic.works/annotation-review-service" .
+
+ext:allowReadOsloOrgsForQuestionAnswering a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideOsloOrganizationsSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
+  ext:scope "http://services.semantic.works/decide-question-answering-service" .
+
+ext:allowReadPublicForQuestionAnswering a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decidePublicSlice ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/decide-question-answering-service" .
+
+ext:allowReadGhentForQuestionAnswering a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideHarvestedGentSlice ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/decide-question-answering-service" .
+
+ext:allowReadFreiburgForQuestionAnswering a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideHarvestedFreiburgSlice ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/decide-question-answering-service" .
+
+ext:allowReadPdfForQuestionAnswering a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideHarvestedPdfSlice ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/decide-question-answering-service" .
+
+ext:allowReadAiSliceForQuestionAnswering a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideAiSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/decide-question-answering-service" .
 
 # Assets (SHACL shapes) for type specifications
 ext:BesluitAdministrativeUnitAsset a odrl:Asset, sh:NodeShape ;
@@ -428,6 +581,10 @@ ext:OaTextPositionSelectorAsset a odrl:Asset, sh:NodeShape ;
     ext:decideAiSlice ;
   sh:targetClass oa:TextPositionSelector .
 
+ext:SessionAsset a odrl:Asset, sh:NodeSchape ;
+  odrl:partOf ext:decideSessionSlice ;
+  sh:targetClass session:Session .
+
 ext:TasksTaskAsset a odrl:Asset, sh:NodeShape ;
   odrl:partOf ext:decideHarvestingSlice ,
     ext:decidePublicSlice ;
@@ -455,6 +612,37 @@ ext:ExtAnnotionJobAsset a odrl:Asset, sh:NodeShape ;
 ext:ExtReviewAnnotationAsset a odrl:Asset, sh:NodeShape ;
   odrl:partOf ext:decideHumanValidationSlice ;
   sh:targetClass ext:ReviewAnnotation .
+
+ext:ExtAnnotationTargetAsset a odrl:Asset, sh:NodeShape ;
+  odrl:partOf ext:decideHumanValidationSlice ;
+  sh:targetClass ext:AnnotationTarget .
+
+ext:ExtCorrectionAnnotationAsset a odrl:Asset, sh:NodeShape ;
+  odrl:partOf ext:decideHumanValidationSlice ;
+  sh:targetClass ext:CorrectionAnnotation .
+
+ext:ActivityAsset a odrl:Asset, sh:NodeShape ;
+  odrl:partOf ext:decideHumanValidationSlice ;
+  sh:targetClass prov:Activity .
+
+ext:StatementAsset a odrl:Asset, sh:NodeShape ;
+  odrl:partOf ext:decideHumanValidationSlice ;
+  sh:targetClass rdf:Statement .
+
+ext:SchemaQuestionAsset a odrl:Asset, sh:NodeShape ;
+  odrl:partOf ext:decideQuestionAnsweringSlice ,
+    ext:decideAiSlice ;
+  sh:targetClass schema:Question .
+
+ext:SchemaAnswerAsset a odrl:Asset, sh:NodeShape ;
+  odrl:partOf ext:decideQuestionAnsweringSlice ,
+    ext:decideAiSlice ;
+  sh:targetClass schema:Answer .
+
+ext:SchemaQuotationAsset a odrl:Asset, sh:NodeShape ;
+  odrl:partOf ext:decideQuestionAnsweringSlice ,
+    ext:decideAiSlice ;
+  sh:targetClass schema:Quotation .
 
 ext:NodeShapeAsset a odrl:Asset, sh:NodeShape ;
   odrl:partOf ext:decideHarvestingSlice ,
@@ -503,35 +691,6 @@ ext:NfoDataContainerAsset a odrl:Asset, sh:NodeShape ;
 ext:NdoDownloadEventAsset a odrl:Asset, sh:NodeShape ;
   odrl:partOf ext:decideHarvestingSlice ;
   sh:targetClass ndo:DownloadEvent .
-
-ext:SecurityAuthenticationConfigurationAsset a odrl:Asset, sh:NodeShape ;
-  odrl:partOf ext:decideHarvestingSlice ;
-  sh:targetClass security:AuthenticationConfiguration .
-
-ext:SecurityCredentialsAsset a odrl:Asset, sh:NodeShape ;
-  odrl:partOf ext:decideHarvestingSlice ;
-  sh:targetClass security:Credentials .
-
-ext:SecurityBasicAuthenticationCredentialsAsset a odrl:Asset, sh:NodeShape ;
-  odrl:partOf ext:decideHarvestingSlice ;
-  sh:targetClass security:BasicAuthenticationCredentials .
-
-ext:SecurityOAuth2CredentialsAsset a odrl:Asset, sh:NodeShape ;
-  odrl:partOf ext:decideHarvestingSlice ;
-  sh:targetClass security:OAuth2Credentials .
-
-ext:WotSecuritySchemeAsset a odrl:Asset, sh:NodeShape ;
-  odrl:partOf ext:decideHarvestingSlice ;
-  sh:targetClass wot:SecurityScheme .
-
-ext:WotBasicSecuritySchemeAsset a odrl:Asset, sh:NodeShape ;
-  odrl:partOf ext:decideHarvestingSlice ;
-  sh:targetClass wot:BasicSecurityScheme .
-
-ext:WotOAuth2SecuritySchemeAsset a odrl:Asset, sh:NodeShape ;
-  odrl:partOf ext:decideHarvestingSlice ;
-  sh:targetClass wot:OAuth2SecurityScheme .
-
 
 # Access rights to the stored copy of this policy itself
 ext:decideAuthzSlice a odrl:AssetCollection ;
