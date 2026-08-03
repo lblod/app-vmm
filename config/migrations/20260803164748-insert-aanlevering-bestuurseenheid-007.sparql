@@ -1,0 +1,21 @@
+PREFIX vmm: <http://lblod.data.gift/vocabularies/vmm/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+INSERT {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?aanlevering prov:wasAttributedTo ?bestuurseenheid .
+  }
+} WHERE {
+   VALUES (?aanleveringId ?bestuurseenheid) {
+      ("10000163535" <http://data.lblod.info/id/bestuurseenheden/0cc6cd604ef836cd7c25ccc83de3a28422cf9b9e515ced6d31defe7c7a20d88f> )
+      ("10000163563" <http://data.lblod.info/id/bestuurseenheden/9db1b46874a57fe63c08fb5f16b117e6f61fdd98e7f64f745d0fceb9d3731169> )
+      ("10000163563" <http://data.lblod.info/id/bestuurseenheden/026509cf3b4eeb7ad88fe57a270060574f60abd1c3524837d36700e40809d210> )
+      ("10000163575" <http://data.lblod.info/id/bestuurseenheden/61c1066c653e5450f2b0a25baeaf60a14a8df400fc421caca07014b0efb55c96> )
+      ("10000163575" <http://data.lblod.info/id/bestuurseenheden/de085ffd17e2b1b37a6069ddf36a4d6b2108e89a095c3143c620759351ac9cd1> )
+      ("10000163579" <http://data.lblod.info/id/bestuurseenheden/be278471a2a318edba32e7ac4294c0eafbe4c8077a34dcbb9c2e43211d4a78a6> )
+      ("10000163579" <http://data.lblod.info/id/bestuurseenheden/68e8c071ddfe1957b9c7b0ccd269f6776f4863a5f5bf4fed636f0e76427200ac> )
+   }
+  ?aanlevering a vmm:Aanlevering ;
+       dct:identifier ?aanleveringId .
+}
