@@ -225,7 +225,7 @@ services:
       TZ: Europe/Brussels
 
   frontend-human-validator:
-    image: lblod/frontend-decide-human-validator:0.0.14
+    image: lblod/frontend-decide-human-validator:feature-vmm
     labels:
       - 'logging=true'
     restart: always

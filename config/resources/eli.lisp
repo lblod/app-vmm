@@ -8,6 +8,9 @@
                 (:work-type :url ,(s-prefix "eli:work_type")))
   :has-many `((expression :via ,(s-prefix "eli:is_realized_by")
                           :as "is-realized-by")
+              (complex-work :via ,(s-prefix "eli:has_member")
+                           :inverse t
+                           :as "is-part-of")
               (document :via ,(s-prefix "eli:related_to")
                         :as "related-to")
               (organization :via ,(s-prefix "dct:creator")
@@ -20,9 +23,10 @@
   :resource-base (s-url "http://data.lblod.info/id/works/")
   :on-path "works")
 
-(define-resource expression ()
+(define-resource expression (annotation-target)
   :class (s-prefix "eli:Expression")
   :properties `((:title :language-string ,(s-prefix "eli:title"))
+                (:description :language-string ,(s-prefix "eli:description"))
                 (:language :uri ,(s-prefix "eli:language"))
                 (:was-derived-from :url ,(s-prefix "prov:wasDerivedFrom"))
                 (:expression-content :language-string ,(s-prefix "epvoc:expressionContent")))
@@ -41,7 +45,7 @@
   :resource-base (s-url "http://data.lblod.info/id/expressions/")
   :on-path "expressions")
 
-(define-resource document () 
+(define-resource document ()
   :class (s-prefix "foaf:Document")
     :properties `((:label :string ,(s-prefix "rdfs:label"))
                 (:file-name :string ,(s-prefix "oparl-temp:fileName"))
