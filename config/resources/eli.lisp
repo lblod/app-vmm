@@ -8,9 +8,11 @@
                 (:work-type :url ,(s-prefix "eli:work_type")))
   :has-many `((expression :via ,(s-prefix "eli:is_realized_by")
                           :as "is-realized-by")
+              (complex-work :via ,(s-prefix "eli:is_part_of")
+                           :as "is-part-of")
               (complex-work :via ,(s-prefix "eli:has_member")
                            :inverse t
-                           :as "is-part-of")
+                           :as "is-member-of")
               (document :via ,(s-prefix "eli:related_to")
                         :as "related-to")
               (organization :via ,(s-prefix "dct:creator")
