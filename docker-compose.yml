@@ -214,7 +214,7 @@ services:
   # HUMAN VALIDATION
   ##############################################################################
   annotation-review:
-    image: lblod/annotation-review-service::feature-vmm
+    image: lblod/annotation-review-service:feature-vmm
     restart: always
     labels:
       - logging=true
