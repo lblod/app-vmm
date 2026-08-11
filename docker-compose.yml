@@ -214,7 +214,7 @@ services:
   # HUMAN VALIDATION
   ##############################################################################
   annotation-review:
-    image: lblod/annotation-review-service:0.0.7
+    image: lblod/annotation-review-service::feature-vmm
     restart: always
     labels:
       - logging=true
@@ -225,7 +225,7 @@ services:
       TZ: Europe/Brussels
 
   frontend-human-validator:
-    image: lblod/frontend-decide-human-validator:0.0.14
+    image: lblod/frontend-decide-human-validator:feature-vmm
     labels:
       - 'logging=true'
     restart: always
