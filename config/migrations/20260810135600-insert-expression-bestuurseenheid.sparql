@@ -1,0 +1,18 @@
+PREFIX eli: <http://data.europa.eu/eli/ontology#>
+PREFIX vmm: <http://lblod.data.gift/vocabularies/vmm/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+INSERT {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?expression <http://mu.semte.ch/vocabularies/ext/owningBody>  ?bestuurseenheid .
+  }
+} WHERE {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?aanlevering a vmm:Aanlevering ;
+                              prov:wasAttributedTo ?bestuurseenheid .
+    ?aanlevering eli:has_member ?beleidsdoelstelling .
+    ?beleidsdoelstelling eli:has_member ?actieplan .
+    ?actieplan eli:has_member ?actie .
+    ?actie eli:is_realized_by ?expression .
+    ?actie a eli:Work .
+  }
+}
