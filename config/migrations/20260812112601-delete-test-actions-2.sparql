@@ -1,0 +1,31 @@
+PREFIX eli: <http://data.europa.eu/eli/ontology#>
+PREFIX vmm: <http://lblod.data.gift/vocabularies/vmm/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+DELETE {
+  GRAPH ?g {
+   ?s ?p ?expression .
+  }
+} WHERE {
+  GRAPH ?g {
+    VALUES ?expression {
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633581/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633582/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633583/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633584/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633585/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633586/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633587/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633588/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633589/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633590/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633591/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633592/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633593/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633594/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633595/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633596/expression>
+      <http://lblod.data.gift/vocabularies/vmm/actie/14633597/expression>
+    }
+    ?s ?p ?expression .
+  }
+}

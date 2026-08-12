@@ -13,5 +13,6 @@ INSERT {
     ?beleidsdoelstelling eli:has_member ?actieplan .
     ?actieplan eli:has_member ?actie .
     ?actie eli:is_realized_by ?expression .
+    ?actie a eli:Work .
   }
 }
