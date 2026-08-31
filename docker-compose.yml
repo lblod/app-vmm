@@ -1,8 +1,8 @@
 x-logging: &default-logging
-  driver: 'json-file'
+  driver: "json-file"
   options:
-    max-size: '10m'
-    max-file: '3'
+    max-size: "10m"
+    max-file: "3"
 
 services:
   ##############################################################################
@@ -12,10 +12,10 @@ services:
     image: semtech/mu-identifier:1.11.0
     environment:
       DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: '[{"variables":[],"name":"public"}]'
-      DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_HEADER: '*'
-      SESSION_COOKIE_SECURE: 'true'
+      DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_HEADER: "*"
+      SESSION_COOKIE_SECURE: "true"
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
@@ -24,7 +24,7 @@ services:
     volumes:
       - ./config/dispatcher:/config
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
@@ -36,30 +36,30 @@ services:
       - ./config/authorization:/config
       - ./data/authorization:/data
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
   virtuoso:
     image: redpencil/virtuoso:1.4.0
     environment:
-      SPARQL_UPDATE: 'true'
+      SPARQL_UPDATE: "true"
     volumes:
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
       - ./data/db:/data
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
   resource:
     image: semtech/mu-cl-resources:1.27.2
     environment:
-      CACHE_CLEAR_PATH: 'http://cache/.mu/clear-keys'
+      CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
     volumes:
       - ./config/resources:/config
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
@@ -68,7 +68,7 @@ services:
     links:
       - resource:backend
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
@@ -77,7 +77,7 @@ services:
     volumes:
       - ./config/delta:/config
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
@@ -86,7 +86,7 @@ services:
     volumes:
       - ./config/sink/sink.conf:/etc/nginx/conf.d/default.conf
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
@@ -100,12 +100,12 @@ services:
   harvest_sameas:
     image: lblod/import-with-sameas-service:4.8.0
     environment:
-      RENAME_DOMAIN: 'http://data.lblod.info/id/'
+      RENAME_DOMAIN: "http://data.lblod.info/id/"
 
   harvest_diff:
     image: lblod/harvesting-diff-service:0.3.0
     environment:
-      TARGET_GRAPH: 'http://mu.semte.ch/graphs/harvesting'
+      TARGET_GRAPH: "http://mu.semte.ch/graphs/harvesting"
 
   ##############################################################################
   # AUTHENTICATION
@@ -115,8 +115,8 @@ services:
     links:
       - database:database
     environment:
-      USERS_GRAPH: 'http://mu.semte.ch/graphs/users'
-      SESSIONS_GRAPH: 'http://mu.semte.ch/graphs/sessions'
+      USERS_GRAPH: "http://mu.semte.ch/graphs/users"
+      SESSIONS_GRAPH: "http://mu.semte.ch/graphs/sessions"
     restart: always
     logging: *default-logging
 
@@ -129,14 +129,14 @@ services:
   frontend-harvesting:
     image: lblod/frontend-harvesting-self-service:feature-oparl-harvesting
     environment:
-      EMBER_AUTHENTICATION_ENABLED: 'true'
-      EMBER_LOGIN_ROUTE: 'login'
+      EMBER_AUTHENTICATION_ENABLED: "true"
+      EMBER_LOGIN_ROUTE: "login"
       EMBER_OPARL_HARVESTING_ENABLED: false
       EMBER_PDF_HARVESTING_ENABLED: false
       EMBER_NER_AND_NEL_ANNOTATIONS_ENABLED: false
       EMBER_CODELIST_MAPPING_ENABLED: true
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
@@ -148,21 +148,21 @@ services:
     volumes:
       - ./config/job-controller:/config
     environment:
-      MU_APPLICATION_GRAPH: 'http://mu.semte.ch/graphs/harvesting'
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/harvesting"
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
   scheduled-job-controller:
     image: lblod/scheduled-job-controller-service:1.3.0
     environment:
-      LOG_SPARQL_ALL: 'false'
-      DEBUG_AUTH_HEADERS: 'false'
+      LOG_SPARQL_ALL: "false"
+      DEBUG_AUTH_HEADERS: "false"
       MAX_CONCURRENT_JOBS: 3
-      MU_APPLICATION_GRAPH: 'http://mu.semte.ch/graphs/harvesting'
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/harvesting"
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
     volumes:
@@ -175,12 +175,12 @@ services:
     volumes:
       - ./config/annotation-job-splitter:/config
     labels:
-      - 'logging=true'
+      - "logging=true"
 
   harvest_singleton-job:
     image: lblod/harvesting-singleton-job-service:1.0.0
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
 
@@ -195,7 +195,7 @@ services:
       AI_GRAPH: http://mu.semte.ch/graphs/public/pdf
       ALLOW_MU_AUTH_SUDO: true
 
-      CONFIG_PATH: '/config/config.json'
+      CONFIG_PATH: "/config/config.json"
       COMPOSE_FILE: /tmp/docker-compose.yaml
       COMPOSE_SERVICE: codelist-labeling
 
@@ -214,19 +214,19 @@ services:
   # HUMAN VALIDATION
   ##############################################################################
   annotation-review:
-    image: lblod/annotation-review-service:feature-vmm
+    image: lblod/annotation-review-service:0.0.9
     restart: always
     labels:
       - logging=true
     logging: *default-logging
     environment:
-      DEFAULT_MU_AUTH_SCOPE: 'http://services.semantic.works/annotation-review-service'
-      ANNOTATION_TARGET_TYPES: 'http://www.w3.org/ns/oa#Annotation,http://mu.semte.ch/vocabularies/ext/AnnotationTarget'
+      DEFAULT_MU_AUTH_SCOPE: "http://services.semantic.works/annotation-review-service"
+      ANNOTATION_TARGET_TYPES: "http://www.w3.org/ns/oa#Annotation,http://mu.semte.ch/vocabularies/ext/AnnotationTarget"
       TZ: Europe/Brussels
 
   frontend-human-validator:
     image: lblod/frontend-decide-human-validator:feature-vmm
     labels:
-      - 'logging=true'
+      - "logging=true"
     restart: always
     logging: *default-logging
