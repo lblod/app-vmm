@@ -188,7 +188,7 @@ services:
   # CODELIST LABELING (AI)
   ##############################################################################
   codelist-labeling:
-    image: semanticai/codelist-labeling-service:0.2.1-vmm
+    image: semanticai/codelist-labeling-service:0.2.5-vmm
     environment:
       JOB_GRAPH: http://mu.semte.ch/graphs/harvesting
       DATA_CONTAINER_GRAPH: http://mu.semte.ch/graphs/harvesting
@@ -199,9 +199,10 @@ services:
       COMPOSE_FILE: /tmp/docker-compose.yaml
       COMPOSE_SERVICE: codelist-labeling
 
+      LLM__PROVIDER: openai
       LLM__API_KEY: ${subscription_key}
       LLM__BASE_URL: ${azure_endpoint}
-      LLM__MODEL_NAME: ${deployment}
+      LLM__MODEL_NAME: ${azure_deployment}
 
       RATE_LIMIT_DELAY_SECONDS: 2.0
 
