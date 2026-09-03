@@ -1,0 +1,24 @@
+PREFIX eli: <http://data.europa.eu/eli/ontology#>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX vmm: <http://lblod.data.gift/vocabularies/vmm/>
+DELETE {
+    GRAPH <http://mu.semte.ch/graphs/public>  {
+    ?aanlevering eli:has_member ?beleidsdoelstelling .
+    ?strategischeDoelstelling ext:hasMemberBk ?beleidsdoelstelling .
+   }
+}
+INSERT {
+    GRAPH <http://mu.semte.ch/graphs/public>  {
+    ?aanlevering eli:has_member ?strategischeDoelstelling .
+    ?strategischeDoelstelling eli:has_member ?beleidsdoelstelling .
+   }
+}
+WHERE {
+    GRAPH <http://mu.semte.ch/graphs/public>  {
+    ?beleidsdoelstelling eli:work_type vmm:Beleidsdoelstelling .
+    ?aanlevering a vmm:Aanlevering ;
+                             eli:has_member ?beleidsdoelstelling .
+    ?strategischeDoelstelling eli:work_type vmm:StrategischeDoelstelling ;
+                                                      ext:hasMemberBk ?beleidsdoelstelling .
+  }
+}
