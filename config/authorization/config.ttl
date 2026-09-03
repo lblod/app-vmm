@@ -55,6 +55,11 @@ ext:decideAuthorizationPolicy a odrl:Set ;
     ext:allowReadForAiSlice ,
     ext:allowReadOsloOrgsForHumanValidation ,
     ext:allowReadForHumanValidation ,
+    ext:allowReadPublicForExport ,
+    ext:allowReadPdfForExport ,
+    ext:allowReadAiForExport ,
+    ext:allowReadHarvestingForExport ,
+    ext:allowReadHumanValidationForExport ,
     ext:allowQuestionAnsweringReadForHumanValidation,
     ext:allowReadHarvestingForHumanValidation ,
     ext:allowWriteForHumanValidation ,
@@ -301,6 +306,41 @@ ext:allowWriteForHumanValidation a odrl:Permission ;
   odrl:assigner ext:decideSystem ;
   odrl:assignee ext:publicParty ;
   ext:scope "http://services.semantic.works/annotation-review-service" .
+
+ext:allowReadHumanValidationForExport a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideHumanValidationSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/vmm-export-service" .
+
+ext:allowReadPublicForExport a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decidePublicSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/vmm-export-service" .
+
+ext:allowReadAiForExport a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideAiSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/vmm-export-service" .
+
+ext:allowReadHarvestingForExport a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideHarvestingSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/vmm-export-service" .
+
+ext:allowReadPdfForExport a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideHarvestedPdfSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/vmm-export-service" .
 
 ext:allowReadForQuestionAnswering a odrl:Permission ;
   odrl:action odrl:read ;
