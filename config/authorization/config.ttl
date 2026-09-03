@@ -60,6 +60,8 @@ ext:decideAuthorizationPolicy a odrl:Set ;
     ext:allowReadAiForExport ,
     ext:allowReadHarvestingForExport ,
     ext:allowReadHumanValidationForExport ,
+    ext:allowReadOsloOrgsForExport ,
+    ext:allowReadOrganizationsForExport ,
     ext:allowQuestionAnsweringReadForHumanValidation,
     ext:allowReadHarvestingForHumanValidation ,
     ext:allowWriteForHumanValidation ,
@@ -312,6 +314,20 @@ ext:allowReadHumanValidationForExport a odrl:Permission ;
   odrl:target ext:decideHumanValidationSlice ;
   odrl:assigner ext:decideSystem ;
   odrl:assignee ext:publicParty ;
+  ext:scope "http://services.semantic.works/vmm-export-service" .
+
+ext:allowReadOsloOrgsForExport a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideOsloOrganizationsSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
+  ext:scope "http://services.semantic.works/vmm-export-service" .
+
+ext:allowReadOrganizationsForExport a odrl:Permission ;
+  odrl:action odrl:read ;
+  odrl:target ext:decideOrganizationsSlice ;
+  odrl:assigner ext:decideSystem ;
+  odrl:assignee ext:publicParty  ;
   ext:scope "http://services.semantic.works/vmm-export-service" .
 
 ext:allowReadPublicForExport a odrl:Permission ;
