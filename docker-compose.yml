@@ -188,7 +188,7 @@ services:
   # CODELIST LABELING (AI)
   ##############################################################################
   codelist-labeling:
-    image: semanticai/codelist-labeling-service:0.2.2-vmm
+    image: semanticai/codelist-labeling-service:0.2.6-vmm
     environment:
       JOB_GRAPH: http://mu.semte.ch/graphs/harvesting
       DATA_CONTAINER_GRAPH: http://mu.semte.ch/graphs/harvesting
