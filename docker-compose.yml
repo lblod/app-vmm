@@ -231,3 +231,16 @@ services:
       - 'logging=true'
     restart: always
     logging: *default-logging
+
+  ##############################################################################
+  # IMPORT/EXPORT
+  ##############################################################################
+  vmm-export:
+    image: lblod/vmm-export-service:latest
+    labels:
+      - 'logging=true'
+    restart: always
+    logging: *default-logging
+    environment:
+      DEFAULT_MU_AUTH_SCOPE: 'http://services.semantic.works/vmm-export-service'
+      TZ: Europe/Brussels
