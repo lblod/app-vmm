@@ -1,0 +1,9 @@
+DELETE { GRAPH ?g { ?s ?p ?o } }
+INSERT { GRAPH ?g { ?s ?newP ?o } }
+WHERE {
+  GRAPH ?g {
+    ?s ?p ?o .
+    FILTER (STRSTARTS(STR(?p), "https://schema.org"))
+    BIND (IRI(REPLACE(STR(?p), "^https://schema\\.org", "http://schema.org")) AS ?newP)
+  }
+}
