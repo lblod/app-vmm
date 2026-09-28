@@ -1,0 +1,98 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix dc: <http://purl.org/dc/terms/>.
+@prefix mu: <http://mu.semte.ch/vocabularies/core/>.
+
+<http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen> a skos:ConceptScheme;
+    mu:uuid "c150b95f-6afa-4738-9a4f-2aa5cf8c72f6";
+    skos:prefLabel "Vlaams Klimaatadaptatieplan 2030 - Strategieën";
+    skos:prefLabel "Vlaams Klimaatadaptatieplan 2030 - Strategieën"@nl;
+    skos:definition "Strategieën uit het Vlaams Klimaatadaptatieplan 2030. De actiepunten uit het Vlaams Actieplan Klimaatadaptatie 2030 verwijzen via skos:broader naar deze strategieën.";
+    skos:definition "Strategieën uit het Vlaams Klimaatadaptatieplan 2030. De actiepunten uit het Vlaams Actieplan Klimaatadaptatie 2030 verwijzen via skos:broader naar deze strategieën."@nl.
+
+<http://lblod.data.gift/id/concept/29b23a80ab4f410399c50422e208b0a4> a skos:Concept;
+    mu:uuid "29b23a80ab4f410399c50422e208b0a4";
+    skos:prefLabel "Vlaanderen bouwt en verbindt groenblauwe infrastructuur, altijd en overal";
+    skos:prefLabel "Vlaanderen bouwt en verbindt groenblauwe infrastructuur, altijd en overal"@nl;
+    skos:notation "S1";
+    skos:definition "Vlaanderenbrede groenblauwe infrastructuur: natuurgebaseerde maatregelen waar het kan, civieltechnische waar het moet. Omvat de groenblauwe metamorfose van de bebouwde kernen, klimaatrobuuste Vlaamse infrastructuur en het faciliteren van klimaatbestendig ontwerpen.";
+    skos:definition "Vlaanderenbrede groenblauwe infrastructuur: natuurgebaseerde maatregelen waar het kan, civieltechnische waar het moet. Omvat de groenblauwe metamorfose van de bebouwde kernen, klimaatrobuuste Vlaamse infrastructuur en het faciliteren van klimaatbestendig ontwerpen."@nl;
+    skos:topConceptOf <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>;
+    skos:inScheme <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>.
+
+<http://lblod.data.gift/id/concept/00fdcda036cd4372a93f5dd1cbe07a12> a skos:Concept;
+    mu:uuid "00fdcda036cd4372a93f5dd1cbe07a12";
+    skos:prefLabel "Waterbeschikbaarheid en watergebruik";
+    skos:prefLabel "Waterbeschikbaarheid en watergebruik"@nl;
+    skos:notation "S2";
+    skos:definition "Het verminderen van het waterverbruik en het inzetten op circulair watergebruik, o.a. via structurele verankering van de Blue Deal en een strategisch plan waterbevoorrading.";
+    skos:definition "Het verminderen van het waterverbruik en het inzetten op circulair watergebruik, o.a. via structurele verankering van de Blue Deal en een strategisch plan waterbevoorrading."@nl;
+    skos:topConceptOf <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>;
+    skos:inScheme <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>.
+
+<http://lblod.data.gift/id/concept/ae77de409ce94c1797c89cf8d027883d> a skos:Concept;
+    mu:uuid "ae77de409ce94c1797c89cf8d027883d";
+    skos:prefLabel "Ruimte voor water in functie van waterveiligheid en droogtepreventie";
+    skos:prefLabel "Ruimte voor water in functie van waterveiligheid en droogtepreventie"@nl;
+    skos:notation "S3";
+    skos:definition "Het terugdringen van het ruimtebeslag, het vrijwaren van open ruimte en risicovolle gebieden, en structurele waterveiligheidsmaatregelen.";
+    skos:definition "Het terugdringen van het ruimtebeslag, het vrijwaren van open ruimte en risicovolle gebieden, en structurele waterveiligheidsmaatregelen."@nl;
+    skos:topConceptOf <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>;
+    skos:inScheme <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>.
+
+<http://lblod.data.gift/id/concept/f540c968e76d40a89093a135d160c529> a skos:Concept;
+    mu:uuid "f540c968e76d40a89093a135d160c529";
+    skos:prefLabel "Herstel en klimaatslim beheer van natuur en bos";
+    skos:prefLabel "Herstel en klimaatslim beheer van natuur en bos"@nl;
+    skos:notation "S4";
+    skos:definition "Herstel en klimaatbestendig beheer van natuur, bos en open ruimte, inclusief klimaatslimme landbouw.";
+    skos:definition "Herstel en klimaatbestendig beheer van natuur, bos en open ruimte, inclusief klimaatslimme landbouw."@nl;
+    skos:topConceptOf <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>;
+    skos:inScheme <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>.
+
+<http://lblod.data.gift/id/concept/76374c6571d64e138fedceac7a47ec2c> a skos:Concept;
+    mu:uuid "76374c6571d64e138fedceac7a47ec2c";
+    skos:prefLabel "Klimaatadaptief gezondheidsbeleid";
+    skos:prefLabel "Klimaatadaptief gezondheidsbeleid"@nl;
+    skos:notation "S5";
+    skos:definition "Klimaatbestendige gezondheidszorg en rampenbeleid, met aandacht voor monitoring, preventie en een gezonde publieke ruimte.";
+    skos:definition "Klimaatbestendige gezondheidszorg en rampenbeleid, met aandacht voor monitoring, preventie en een gezonde publieke ruimte."@nl;
+    skos:topConceptOf <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>;
+    skos:inScheme <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>.
+
+<http://lblod.data.gift/id/concept/6d171326458644428adffe22c782fc02> a skos:Concept;
+    mu:uuid "6d171326458644428adffe22c782fc02";
+    skos:prefLabel "Samenwerken en coördineren";
+    skos:prefLabel "Samenwerken en coördineren"@nl;
+    skos:notation "S6";
+    skos:definition "Sectorbrede kennisdeling, coördinatie bij calamiteiten, aansluiting bij de EU-strategie klimaatadaptatie en monitoring van de klimaatbestendigheid.";
+    skos:definition "Sectorbrede kennisdeling, coördinatie bij calamiteiten, aansluiting bij de EU-strategie klimaatadaptatie en monitoring van de klimaatbestendigheid."@nl;
+    skos:topConceptOf <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>;
+    skos:inScheme <http://lblod.data.gift/id/conceptscheme/vap-klimaatadaptatie-strategieen>.
+
+# Actiepunten (scheme vap-klimaatadaptatie) -> strategie
+
+<http://lblod.data.gift/id/concept/747e0c8bb5fe5e6eaa7fb1279799cbc9> skos:broader <http://lblod.data.gift/id/concept/29b23a80ab4f410399c50422e208b0a4>.
+<http://lblod.data.gift/id/concept/2e8d0c2a2ea74569771ac2b6b100e354> skos:broader <http://lblod.data.gift/id/concept/29b23a80ab4f410399c50422e208b0a4>.
+<http://lblod.data.gift/id/concept/87889afe0f585314f25ed2bc22548a11> skos:broader <http://lblod.data.gift/id/concept/29b23a80ab4f410399c50422e208b0a4>.
+<http://lblod.data.gift/id/concept/593e3c23001b5908f7897a0444042e5a> skos:broader <http://lblod.data.gift/id/concept/29b23a80ab4f410399c50422e208b0a4>.
+<http://lblod.data.gift/id/concept/9934028115327e325d85e7b4b0d57635> skos:broader <http://lblod.data.gift/id/concept/29b23a80ab4f410399c50422e208b0a4>.
+<http://lblod.data.gift/id/concept/28b4c57659d7a70a90caaed401ad5073> skos:broader <http://lblod.data.gift/id/concept/29b23a80ab4f410399c50422e208b0a4>.
+
+<http://lblod.data.gift/id/concept/98c9135be5bf18f9ecba4639c179d92e> skos:broader <http://lblod.data.gift/id/concept/00fdcda036cd4372a93f5dd1cbe07a12>.
+
+<http://lblod.data.gift/id/concept/5692aaab9aa2e58816e7e40d28d351c2> skos:broader <http://lblod.data.gift/id/concept/ae77de409ce94c1797c89cf8d027883d>.
+<http://lblod.data.gift/id/concept/9f079d124220e3a28810a9c9ca7ec241> skos:broader <http://lblod.data.gift/id/concept/ae77de409ce94c1797c89cf8d027883d>.
+
+<http://lblod.data.gift/id/concept/1fb13122e9183b6e12f5c166a8c27204> skos:broader <http://lblod.data.gift/id/concept/f540c968e76d40a89093a135d160c529>.
+<http://lblod.data.gift/id/concept/b66c95c2ed5ad070143c5ef5080b0d8d> skos:broader <http://lblod.data.gift/id/concept/f540c968e76d40a89093a135d160c529>.
+
+<http://lblod.data.gift/id/concept/fbca95dfd2130563da0fd8fbf1014b7d> skos:broader <http://lblod.data.gift/id/concept/76374c6571d64e138fedceac7a47ec2c>.
+
+<http://lblod.data.gift/id/concept/2e0711c64e35d8f0948d2ad9cdb0a2e6> skos:broader <http://lblod.data.gift/id/concept/6d171326458644428adffe22c782fc02>.
+<http://lblod.data.gift/id/concept/91f4697b6d1ff1782ca9a274cc2de2f9> skos:broader <http://lblod.data.gift/id/concept/6d171326458644428adffe22c782fc02>.
+<http://lblod.data.gift/id/concept/0818b02dc68cf89a261b38540f4adece> skos:broader <http://lblod.data.gift/id/concept/6d171326458644428adffe22c782fc02>.
+<http://lblod.data.gift/id/concept/63768b2391e27e4df01ecb3339b197b0> skos:broader <http://lblod.data.gift/id/concept/6d171326458644428adffe22c782fc02>.
