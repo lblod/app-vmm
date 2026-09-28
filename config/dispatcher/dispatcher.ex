@@ -29,8 +29,8 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://annotation-review/"
   end
 
-  match "/export", %{ reverse_host: ["human-validator" | _rest], accept: [:any], layer: :api_services } do
-    Proxy.forward conn, [], "http://vmm-export/export"
+  match "/export/*path", %{ reverse_host: ["human-validator" | _rest], accept: [:any], layer: :api_services } do
+    Proxy.forward conn, path, "http://vmm-export/export/"
   end
 
   #################
