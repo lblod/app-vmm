@@ -26,5 +26,5 @@ docker-compose.override.yml
 *.csv
 /vmm-quality
 vmm-dev/formatting_v2.ipynb
-config/migrations/*-insert-transacties*.graph
-config/migrations/*-insert-transacties*.ttl
+config/migrations/*-insert-transactie*.graph
+config/migrations/*-insert-transactie*.ttl
