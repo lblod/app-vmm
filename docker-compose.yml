@@ -244,3 +244,8 @@ services:
     environment:
       DEFAULT_MU_AUTH_SCOPE: 'http://services.semantic.works/vmm-export-service'
       TZ: Europe/Brussels
+  project-scripts:
+    image: semtech/simple-script-store:1.0.0
+    volumes:
+      - ./scripts/project:/app/scripts/
+    restart: 'no'
