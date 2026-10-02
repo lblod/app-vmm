@@ -28,3 +28,4 @@ docker-compose.override.yml
 vmm-dev/formatting_v2.ipynb
 config/migrations/*-insert-transactie*.graph
 config/migrations/*-insert-transactie*.ttl
+/Documentation
