@@ -236,7 +236,7 @@ services:
   # IMPORT/EXPORT
   ##############################################################################
   vmm-export:
-    image: lblod/vmm-export-service:0.0.2
+    image: lblod/vmm-export-service:0.0.3
     labels:
       - 'logging=true'
     restart: always
