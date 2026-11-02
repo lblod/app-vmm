@@ -215,7 +215,7 @@ services:
   # HUMAN VALIDATION
   ##############################################################################
   annotation-review:
-    image: lblod/annotation-review-service:0.0.9
+    image: lblod/annotation-review-service:0.0.13
     restart: always
     labels:
       - logging=true
