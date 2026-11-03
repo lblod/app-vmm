@@ -1,0 +1,10 @@
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/harvesting> {
+    <http://data.lblod.info/ontology/airo#mistral-medium-3-5>
+       ext:openrouterId "mistralai/mistral-medium-3-5" .
+    <http://data.lblod.info/ontology/airo#gpt-5-6-luna>
+       ext:openrouterId "openai/gpt-5.6-luna" .
+  }
+}
