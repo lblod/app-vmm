@@ -1,0 +1,73 @@
+# Brings the BestuurseenheidClassificatieCode codelist in line with the official scheme
+# (https://data.vlaanderen.be/id/conceptscheme/BestuurseenheidClassificatieCode, fetched 2026-11-13).
+# The snapshot in bestuurseenheden-and-organizations-flanders/20260128112600-add-classification-codes.ttl
+# lacked 5 concepts (among which Welzijnsvereniging and Autonome verzorgingsinstelling, used by
+# bestuurseenheden without a label) and a few definitions/scheme links on existing concepts.
+
+@prefix code: <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/> .
+@prefix cs: <http://data.vlaanderen.be/id/conceptscheme/> .
+@prefix ext: <http://mu.semte.ch/vocabularies/ext/> .
+@prefix mu: <http://mu.semte.ch/vocabularies/core/> .
+@prefix organisatie: <http://lblod.data.gift/vocabularies/organisatie/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+code:088784b6-e188-48bf-b94f-94665f9e1f53 skos:definition "Een provincie kan een provinciaal extern verzelfstandigd agentschap in privaatrechtelijke vorm (private EVA) oprichten voor welbepaalde beleidsuitvoerende taak van provinciaal belang. Een private EVA is een private rechtspersoon in de vorm van een vereniging, stichting of vennootschap." .
+
+code:293e5f58-9544-496e-88e0-734a137f6ebc a organisatie:BestuurseenheidClassificatieCode,
+        ext:BestuurseenheidClassificatieCode,
+        ext:OrganizationClassificationCode,
+        skos:Concept ;
+    mu:uuid "293e5f58-9544-496e-88e0-734a137f6ebc" ;
+    skos:inScheme cs:BestuurseenheidClassificatieCode ;
+    skos:prefLabel "Watering" ;
+    skos:topConceptOf cs:BestuurseenheidClassificatieCode .
+
+code:2ad46df5-5c79-4d67-84d5-604c1377231e skos:definition "Een gemeente kan een gemeentelijk extern verzelfstandigd agentschap in privaatrechtelijke vorm (private EVA) oprichten voor welbepaalde beleidsuitvoerende taak van gemeentelijk belang. Een private EVA is een private rechtspersoon in de vorm van een vereniging, stichting of vennootschap." .
+
+code:34b5af85-dc9f-468f-9e03-ef89b174c267 a organisatie:BestuurseenheidClassificatieCode,
+        ext:BestuurseenheidClassificatieCode,
+        ext:OrganizationClassificationCode,
+        skos:Concept ;
+    mu:uuid "34b5af85-dc9f-468f-9e03-ef89b174c267" ;
+    skos:definition "Een autonome verzorgingsinstelling is een vereniging voor maatschappelijk welzijn (OCMW-vereniging) die een (gedeelte van) een ziekenhuis exploiteert. Ze is een vorm van OCMW-verzelfstandiging en heeft een publiekrechtelijk statuut." ;
+    skos:inScheme cs:BestuurseenheidClassificatieCode ;
+    skos:prefLabel "Autonome verzorgingsinstelling" ;
+    skos:topConceptOf cs:BestuurseenheidClassificatieCode .
+
+code:4b8450cf-a326-4c66-9e63-b4ec10acc7f6 a skos:Concept ;
+    skos:definition "De opdrachthoudende verenigingen (OV), ook bekend als intercommunales, zijn de meest intensieve vormen van intergemeentelijke samenwerking. Ze hebben allebei eigen rechtspersoonlijkheid en onderscheiden zich van elkaar door de beheersoverdracht. Opdrachthoudende verenigingen met private deelname zijn enkel mogelijk in de energiesector, de afvalsector of bij crematoria." ;
+    skos:inScheme cs:BestuurseenheidClassificatieCode ;
+    skos:topConceptOf cs:BestuurseenheidClassificatieCode .
+
+code:52cc9d8d-1c9a-4d92-9936-da9d4a622ec4 a skos:Concept ;
+    skos:definition "Het Agentschap Binnenlands Bestuur (ABB) is een agentschap van de Vlaamse overheid. Het agentschap is actief op verschillende domeinen en helpt burgers en besturen te verbinden en versterken." ;
+    skos:inScheme cs:BestuurseenheidClassificatieCode ;
+    skos:topConceptOf cs:BestuurseenheidClassificatieCode .
+
+code:cc4e2d67-603b-4784-9b61-e50bac1ec089 a organisatie:BestuurseenheidClassificatieCode,
+        ext:BestuurseenheidClassificatieCode,
+        ext:OrganizationClassificationCode,
+        skos:Concept ;
+    mu:uuid "cc4e2d67-603b-4784-9b61-e50bac1ec089" ;
+    skos:inScheme cs:BestuurseenheidClassificatieCode ;
+    skos:prefLabel "OCMW vereniging" ;
+    skos:topConceptOf cs:BestuurseenheidClassificatieCode .
+
+code:d312c541-a263-4004-bca2-63eb991458c3 a organisatie:BestuurseenheidClassificatieCode,
+        ext:BestuurseenheidClassificatieCode,
+        ext:OrganizationClassificationCode,
+        skos:Concept ;
+    mu:uuid "d312c541-a263-4004-bca2-63eb991458c3" ;
+    skos:inScheme cs:BestuurseenheidClassificatieCode ;
+    skos:prefLabel "Polders" ;
+    skos:topConceptOf cs:BestuurseenheidClassificatieCode .
+
+code:e8294b73-87c9-4fa2-9441-1937350763c9 a organisatie:BestuurseenheidClassificatieCode,
+        ext:BestuurseenheidClassificatieCode,
+        ext:OrganizationClassificationCode,
+        skos:Concept ;
+    mu:uuid "e8294b73-87c9-4fa2-9441-1937350763c9" ;
+    skos:inScheme cs:BestuurseenheidClassificatieCode ;
+    skos:prefLabel "Welzijnsvereniging" ;
+    skos:topConceptOf cs:BestuurseenheidClassificatieCode .
+
