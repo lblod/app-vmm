@@ -1,0 +1,11 @@
+PREFIX vmm: <http://lblod.data.gift/vocabularies/vmm/>
+
+DELETE {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?expression vmm:prioritair ?prioritair .
+  }
+} WHERE {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?expression vmm:prioritair ?prioritair .
+  }
+}
