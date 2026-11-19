@@ -17,9 +17,17 @@ services:
     restart: "no"
   deltanotifier:
     restart: "no"
+  sink:
+    restart: "no"
   migrations:
     restart: "no"
+  harvest_sameas:
+    restart: "no"
+  harvest_diff:
+    restart: "no"
   login:
+    restart: "no"
+  mocklogin:
     restart: "no"
   frontend-harvesting:
     restart: "no"
@@ -36,4 +44,6 @@ services:
   annotation-review:
     restart: "no"
   frontend-human-validator:
+    restart: "no"
+  vmm-export:
     restart: "no"

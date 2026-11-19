@@ -96,16 +96,28 @@ services:
       MU_SPARQL_ENDPOINT: http://virtuoso:8890/sparql
     volumes:
       - ./config/migrations:/data/migrations
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
 
   harvest_sameas:
     image: lblod/import-with-sameas-service:4.8.0
     environment:
       RENAME_DOMAIN: "http://data.lblod.info/id/"
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
 
   harvest_diff:
     image: lblod/harvesting-diff-service:0.3.0
     environment:
       TARGET_GRAPH: "http://mu.semte.ch/graphs/harvesting"
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
 
   ##############################################################################
   # AUTHENTICATION
@@ -119,9 +131,15 @@ services:
       SESSIONS_GRAPH: "http://mu.semte.ch/graphs/sessions"
     restart: always
     logging: *default-logging
+    labels:
+      - "logging=true"
 
   mocklogin:
     image: lblod/mock-login-service:0.7.0
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
 
   ##############################################################################
   # PIPELINE DASHBOARD
@@ -210,6 +228,9 @@ services:
     volumes:
       - ./config/codelist/config-openai.json:/config/config.json:ro # Mount config as read-only
       - ./docker-compose.yml:/tmp/docker-compose.yaml
+    labels:
+      - "logging=true"
+    logging: *default-logging
 
   ##############################################################################
   # HUMAN VALIDATION
@@ -251,3 +272,6 @@ services:
     volumes:
       - ./scripts/project:/app/scripts/
     restart: "no"
+    labels:
+      - "logging=true"
+    logging: *default-logging
